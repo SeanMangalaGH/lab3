@@ -18,12 +18,15 @@ export interface GroceryItem {
   quantity: number;
   unitId: string;
   image: string;
+  isCompleted: boolean;
 }
 
 interface GroceryContextType {
   categories: Category[];
   units: Unit[];
   items: GroceryItem[];
+  getUnitName: (id: string) => string;
+  toggleItemCompleted: (id: string) => void;
 }
 
 const GroceryContext = createContext<GroceryContextType | undefined>(undefined);
@@ -74,6 +77,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 2,
       unitId: "2",
       image: "",
+      isCompleted: false,
     },
     {
       id: "2",
@@ -82,6 +86,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 1,
       unitId: "3",
       image: "",
+      isCompleted: false,
     },
     {
       id: "3",
@@ -90,6 +95,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 1,
       unitId: "2",
       image: "",
+      isCompleted: false,
     },
     {
       id: "4",
@@ -98,6 +104,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 4,
       unitId: "1",
       image: "",
+      isCompleted: false,
     },
     {
       id: "5",
@@ -106,6 +113,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 1,
       unitId: "3",
       image: "",
+      isCompleted: false,
     },
     {
       id: "6",
@@ -114,6 +122,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 2,
       unitId: "3",
       image: "",
+      isCompleted: false,
     },
     {
       id: "7",
@@ -122,6 +131,7 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 1,
       unitId: "1",
       image: "",
+      isCompleted: false,
     },
     {
       id: "8",
@@ -130,11 +140,29 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
       quantity: 1,
       unitId: "2",
       image: "",
+      isCompleted: false,
     },
   ]);
 
+  // Function returns unit name given unit id
+  const getUnitName = (id: string) => {
+    const itemUnit = units.find((unit) => unit.id === id);
+    return itemUnit ? itemUnit.name : "";
+  };
+
+  // Function negates isCompleted boolean when called
+  const toggleItemCompleted = (id: string) => {
+    setItems((items) =>
+      items.map((item) =>
+        item.id == id ? { ...item, isCompleted: !item.isCompleted } : item,
+      ),
+    );
+  };
+
   return (
-    <GroceryContext.Provider value={{ categories, items, units }}>
+    <GroceryContext.Provider
+      value={{ categories, items, units, getUnitName, toggleItemCompleted }}
+    >
       {children}
     </GroceryContext.Provider>
   );

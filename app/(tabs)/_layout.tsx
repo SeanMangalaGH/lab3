@@ -27,9 +27,9 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Cart",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="cart" size={size} color={color} />
           ),
         }}
       />

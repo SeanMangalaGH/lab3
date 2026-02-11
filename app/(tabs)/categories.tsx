@@ -1,10 +1,21 @@
+import { useGrocery } from "@/contexts/GroceryContext";
 import React from "react";
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 
 const categories = () => {
+  const { categories } = useGrocery();
+
   return (
     <View>
-      <Text>categories</Text>
+      <FlatList
+        data={categories}
+        keyExtractor={(category) => category.id}
+        renderItem={({ item }) => (
+          <View>
+            <Text>{item.name}</Text>
+          </View>
+        )}
+      ></FlatList>
     </View>
   );
 };
