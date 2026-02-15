@@ -1,5 +1,10 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
+// Grocery Context DB
+// Use to store and edit Categories, Items, and Units data
+// Author: Sean Mangala
+// Date: 2026-02-15
+
 export interface Category {
   id: string;
   name: string;
@@ -54,11 +59,6 @@ export const GroveryProvider = ({ children }: { children: ReactNode }) => {
     {
       id: "3",
       name: "Dairy",
-      image: "",
-    },
-    {
-      id: "4",
-      name: "Snacks",
       image: "",
     },
   ]);

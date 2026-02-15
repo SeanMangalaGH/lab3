@@ -17,8 +17,8 @@ import {
 
 const addItem = () => {
   const { categories, units } = useGrocery();
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedUnit, setSelectedUnit] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Select category");
+  const [selectedUnit, setSelectedUnit] = useState("Select unit");
 
   return (
     <View style={styles.container}>
